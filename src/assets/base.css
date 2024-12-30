@@ -1,0 +1,30 @@
+:root {
+  --nut-serious-font: #00000096;
+  --nut-primary-color: #ff7ab8;
+  --nut-primary-color-transparent: #ffb6d89f;
+  --primary-color-hover: #ff4093;
+  --primary-color-text: #ff74b0;
+  --dark-bg: #363636f8;
+  --light-bg: #ffff;
+}
+
+html,
+body {
+  /* overscroll-behavior: none;  禁止滾動邊界的彈性效果 */
+}
+
+div {
+  /* Amber Yellow #ffa6fc*/
+  /* Piquant Green #ff94e0*/
+  /* Cyber Grape #ff76d8*/
+  /* Brandywine #fc68dc*/
+  /* Gardener's Soil #ff59c7*/
+  background-color: var(--light-bg);
+  border-color: var(--nut-primary-color);
+  color: var(--nut-serious-font);
+}
+
+.currency-symbol {
+  font-size: 14px;
+}
+

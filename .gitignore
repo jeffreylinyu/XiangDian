@@ -1,0 +1,30 @@
+# 忽略 Firebase CLI 生成的文件
+.firebase/
+
+# 忽略 Node.js 依賴
+node_modules/
+
+# 忽略日誌文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 忽略本地環境配置文件
+.env
+.env.local
+.env.*.local
+
+# 忽略 Firebase Functions 的依賴
+functions/node_modules/
+
+# 忽略臨時文件和編譯生成的文件
+*.log
+*.tmp
+*.lock
+*.swp
+.DS_Store
+Thumbs.db
+
+# 如果你使用 TypeScript，忽略輸出目錄
+dist/
+build/

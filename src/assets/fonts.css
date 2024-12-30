@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&family=Noto+Sans+TC:wght@100..900&display=swap");
+
+div {
+  font-family: LXGW WenKai TC, cursive;
+  font-weight: 900;
+  /* font-family: Chocolate Classical Sans; */
+}
