@@ -1,13 +1,24 @@
 <template>
-  <div class="product-card-box" @click="openDialog">
-    <div class="img-box"><img :src="productImg" alt="" /></div>
+  <div v-show="!isLoaded" class="product-card-box" @click="openDialog">
+    <CardImg @load="isLoaded = false" :productImg="productImg"></CardImg>
+    <!-- <div class="img-box"><img :src="productImg" alt="" /></div> -->
     <div class="name-box">
       <span>{{ productName }}</span>
     </div>
     <div class="price-box">
       <span class="currency-symbol">$</span>{{ productPrice }}
     </div>
-    <span class="product-card-badge" v-if="cartQuantity > 0">{{ cartQuantity }}</span>
+    <span class="product-card-badge" v-if="cartQuantity > 0">{{
+      cartQuantity
+    }}</span>
+  </div>
+
+  <div v-if="isLoaded" class="product-card-box skeleton-box">
+    <CardImg></CardImg>
+    <div class="name-box">
+      <span class="skeleton-text"></span>
+    </div>
+    <div class="price-box"><span class="skeleton-text small"></span></div>
   </div>
 
   <div class="dialog-box">
@@ -31,18 +42,26 @@
           </div>
           <div class="dialog-scroll-box">
             <div class="dialog-img-box">
-              <img :src="productImg" alt="" />
+              <img
+                :class="{ skeleton: isDialogImgLoaded }"
+                @load="isDialogImgLoaded = false"
+                :src="productImg"
+                alt=""
+              />
             </div>
             <div class="dialog-info-box">
               <div class="dialog-title-box">
                 <div>{{ productName }}</div>
               </div>
-              <div class="dialog-product-content-box" v-html="contentHtml"></div>
+              <div
+                class="dialog-product-content-box"
+                v-html="contentHtml"
+              ></div>
               <div class="dialog-product-price-box">
                 <span class="currency-symbol">NT$</span>{{ productPrice }}
               </div>
               <template
-                v-for="(addonGroup, index) in (addChoose as AddonGroup[])"
+                v-for="(addonGroup, index) in (addChoose as Choose[])"
                 :key="index"
               >
                 <div
@@ -100,7 +119,8 @@
                   <span class="dialog-add-order-btn">
                     選好了
                     <span>
-                      <span class="currency-symbol">$</span><span>{{ calculatedPrice }}</span>
+                      <span class="currency-symbol">$</span
+                      ><span>{{ calculatedPrice }}</span>
                     </span>
                   </span>
                 </nut-button>
@@ -117,43 +137,42 @@
 import { ref, computed } from "vue";
 import { useOrderStore } from "@/stores/orderStore";
 import { CloseLittle } from "@nutui/icons-vue";
+import CardImg from "@/components/CardImg.vue";
+import type { ProductSetting, Choose, Option } from "@/interface/product";
+
+const isLoaded = ref(true);
+const isDialogImgLoaded = ref(true);
 
 const orderStore = useOrderStore();
 
-interface AddonOption {
-  name: string;
-  price: number;
-  default: boolean;
-}
-
-interface AddonGroup {
-  title: string;
-  multiple: boolean;
-  options: AddonOption[];
-}
-
 // Props 定義
 const props = defineProps({
-  productId: { type: Number, required: true },
+  productId: { type: String, required: true },
   productImg: { type: String, required: true },
   productName: { type: String, required: true },
   productPrice: { type: Number, required: true },
   cartQuantity: { type: Number, required: true },
   contentHtml: { type: String, required: true },
-  addChoose: { type: Array as () => AddonGroup[], required: true },
+  addChoose: { type: Array as () => Choose[], required: true },
 });
 
-const countNumber = ref<number>(1);
+// 組件類型問題，所以用any
+const countNumber = ref<any>(1);
 const dialogTableVisible = ref<boolean>(false);
 
 // 已選擇的加料選項
 const resetAddOns = () => {
   return props.addChoose.reduce((acc, item) => {
-    acc[item.title] = item.multiple
-      ? []
-      : item.options.find((opt) => opt.default) || null;
+    if (item.multiple) {
+      // 多選直接回傳符合條件的陣列
+      acc[item.title] = item.options.filter((opt) => opt.default);
+    } else {
+      // 單選找到預設值則包成陣列，否則回傳空陣列
+      const defaultOpt = item.options.find((opt) => opt.default);
+      acc[item.title] = defaultOpt ? [defaultOpt] : [];
+    }
     return acc;
-  }, {} as Record<string, AddonOption[] | AddonOption | null>);
+  }, {} as Record<string, Option[]>);
 };
 
 const selectedAddOns = ref(resetAddOns());
@@ -163,13 +182,11 @@ const calculatedPrice = computed(() => {
   let addonsPrice = 0;
   for (const key in selectedAddOns.value) {
     const addon = selectedAddOns.value[key];
-    if (Array.isArray(addon)) {
+    if (addon.length > 0) {
       addonsPrice += addon.reduce((sum, item) => sum + item.price, 0);
-    } else if (addon) {
-      addonsPrice += addon.price;
     }
   }
-  return (props.productPrice + addonsPrice) * countNumber.value;
+  return (props.productPrice + addonsPrice) * parseInt(countNumber.value, 10);
 });
 
 // 開啟對話框並重設選項
@@ -177,6 +194,7 @@ const openDialog = () => {
   dialogTableVisible.value = true;
   countNumber.value = 1;
   selectedAddOns.value = resetAddOns();
+  isDialogImgLoaded.value = true;
 };
 
 // 關閉對話框
@@ -190,14 +208,13 @@ const addToOrder = () => {
     id: props.productId,
     name: props.productName,
     price: calculatedPrice.value,
-    quantity: countNumber.value,
+    quantity: parseInt(countNumber.value, 10),
     addons: selectedAddOns.value,
+    img: props.productImg,
   });
   closeDialog();
 };
 </script>
-
-
 
 <style scoped>
 .dialog-box :deep(.nut-popup) {
@@ -256,11 +273,14 @@ const addToOrder = () => {
 
         img {
           width: 95%;
-          height: auto;
+          height: 300px;
           max-height: 300px;
           object-fit: cover;
           border-radius: 20px;
         }
+      }
+      .dialog-img-box.skeleton {
+        height: 300px;
       }
       .dialog-info-box {
         padding: 15px;
@@ -458,24 +478,6 @@ const addToOrder = () => {
   box-sizing: border-box;
   padding: 10px;
   border-radius: 15px;
-
-  .img-box {
-    width: 75%;
-    aspect-ratio: 1 / 1;
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    transform: translate(-50%);
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  .img-box img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
 
   .name-box {
     display: flex;

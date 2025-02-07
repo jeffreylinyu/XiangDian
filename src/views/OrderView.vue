@@ -16,34 +16,18 @@
 import ProductTabs from "@/components/ProductTabs.vue";
 import ProductList from "@/components/ProductList.vue";
 import OrderSubtotal from "@/components/OrderSubtotal.vue";
+import { ref, onMounted, watch } from "vue";
+import {
+  redirectToLine,
+  loginWithLine,
+} from "@/utils/lineUtils";
 
-import { ref, onMounted } from "vue";
-import liff from "@line/liff";
-
-const userProfile = ref();
 
 onMounted(async () => {
-  try {
-    // 初始化 LIFF
-    await liff.init({ liffId: "2006541842-EJ6dB3lV" });
-    console.log("LIFF 初始化成功");
-
-    // 檢查是否已登入
-    if (liff.isLoggedIn()) {
-      const profile = await liff.getProfile();
-      userProfile.value = profile;
-    } else {
-      console.log("尚未登入");
-    }
-  } catch (error) {
-    console.error("LIFF 初始化失敗", error);
-  }
+  // redirectToLine('liff');
+  // await loginWithLine()
+  // redirectToLineDownload();
 });
-
-// 登入方法
-const login = () => {
-  liff.login();
-};
 </script>
 
 <style scoped>
