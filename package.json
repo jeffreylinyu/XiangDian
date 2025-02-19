@@ -1,0 +1,38 @@
+{
+  "name": "xiangdian-order",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force"
+  },
+  "dependencies": {
+    "@firebasegen/default-connector": "file:dataconnect-generated\\js\\default-connector",
+    "@line/bot-sdk": "^9.5.0",
+    "@line/liff": "^2.25.0",
+    "@nutui/icons-vue": "^0.1.1",
+    "@nutui/nutui": "^4.3.13",
+    "@vue/compiler-sfc": "^3.5.13",
+    "axios": "^1.7.9",
+    "firebase": "^11.1.0",
+    "pinia": "^2.2.6",
+    "reset-css": "^5.0.2",
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.17.6",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/tsconfig": "^0.5.1",
+    "firebase-tools": "^13.29.1",
+    "npm-run-all2": "^7.0.1",
+    "typescript": "~5.7.3",
+    "vite": "^6.0.7",
+    "vue-tsc": "^2.2.0"
+  }
+}
