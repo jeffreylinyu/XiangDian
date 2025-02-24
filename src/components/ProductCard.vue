@@ -252,13 +252,13 @@ const addToOrder = () => {
     overflow: hidden;
     .dialog-back-btn {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: clamp(5px, 2vw, 10px);
+      right: clamp(5px, 2vw, 10px);
       padding: 0;
-      width: 32px;
-      height: 32px;
+      width: clamp(32px, 8vw, 40px);
+      height: clamp(32px, 8vw, 40px);
       border-radius: 30%;
-      z-index: 999999999999;
+      z-index: 999;
       opacity: 0.8;
       background-color: rgba(0, 0, 0, 0.308);
     }
@@ -267,53 +267,67 @@ const addToOrder = () => {
       overflow: auto;
       .dialog-img-box {
         width: 100%;
-        height: auto;
+        padding: clamp(10px, 3vw, 20px);
+        box-sizing: border-box;
         display: flex;
         justify-content: center;
+        align-items: center;
 
         img {
-          width: 95%;
-          height: 300px;
-          max-height: 300px;
+          width: clamp(200px, 60vw, 300px);
+          height: clamp(200px, 60vw, 300px);
           object-fit: cover;
           border-radius: 20px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media screen and (min-width: 768px) {
+          img {
+            width: clamp(250px, 40vw, 350px);
+            height: clamp(250px, 40vw, 350px);
+          }
+        }
+
+        @media screen and (min-width: 1024px) {
+          img {
+            width: clamp(300px, 30vw, 400px);
+            height: clamp(300px, 30vw, 400px);
+          }
         }
       }
       .dialog-img-box.skeleton {
         height: 300px;
       }
       .dialog-info-box {
-        padding: 15px;
+        padding: clamp(10px, 3vw, 15px);
         height: auto;
         .dialog-title-box {
           display: flex;
-          padding: 15px 0 30px 0;
+          padding: clamp(10px, 3vw, 15px) 0 clamp(20px, 5vw, 30px) 0;
 
           div {
-            font-size: 26px;
+            font-size: clamp(20px, 4vw, 26px);
             color: var(--nut-serious-font);
             font-weight: bolder;
           }
         }
         .dialog-product-content-box {
-          white-space: normal; /* 預設：移除多餘空格 */
-          line-height: 1.5; /* 調整行高，增加可讀性 */
+          font-size: clamp(14px, 3vw, 16px);
+          line-height: 1.5;
         }
       }
       .dialog-product-price-box {
         border-bottom: 1px solid #ffb6d86c;
-        margin-top: 30px;
-        font-size: 26px;
-        display: flex;
-        justify-content: start;
-        padding-bottom: 20px;
-        margin-bottom: 20px;
+        margin-top: clamp(20px, 5vw, 30px);
+        font-size: clamp(20px, 4vw, 26px);
+        padding-bottom: clamp(15px, 4vw, 20px);
+        margin-bottom: clamp(15px, 4vw, 20px);
         span {
           margin-right: 5px;
         }
       }
       .dialog-product-addons-box {
-        margin-bottom: 20px;
+        margin-bottom: clamp(15px, 4vw, 20px);
         .addons-options {
           display: flex;
           flex-direction: column;
@@ -323,16 +337,16 @@ const addToOrder = () => {
           width: 100%;
           display: flex;
           justify-content: start;
-          padding: 10px 0;
+          padding: clamp(8px, 2vw, 10px) 0;
           .group-title {
-            font-size: 20px;
+            font-size: clamp(16px, 3.5vw, 20px);
           }
         }
 
         /* 整體容器樣式 */
         .addon-option {
-          font-size: 16px;
-          margin-bottom: 8px;
+          font-size: clamp(14px, 3vw, 16px);
+          margin-bottom: clamp(6px, 2vw, 8px);
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -355,15 +369,15 @@ const addToOrder = () => {
         /* 自定義 checkbox 外觀 */
         .addon-option .custom-checkbox {
           display: inline-block;
-          width: 18px;
-          height: 18px;
+          width: clamp(16px, 4vw, 18px);
+          height: clamp(16px, 4vw, 18px);
           border: 2px solid var(--nut-primary-color); /* 邊框顏色 */
           border-radius: 4px; /* 圓角 */
           position: relative;
           background-color: #fff; /* 預設背景色 */
           cursor: pointer;
           transition: all 0.2s ease-in-out;
-          margin-right: 10px; /* 與文字間距 */
+          margin-right: clamp(8px, 2vw, 10px); /* 與文字間距 */
         }
 
         /* 選中時的背景顏色與邊框 */
@@ -396,15 +410,15 @@ const addToOrder = () => {
         /* 自定義 radio 外觀 */
         .addon-option .custom-radio {
           display: inline-block;
-          width: 18px;
-          height: 18px;
+          width: clamp(16px, 4vw, 18px);
+          height: clamp(16px, 4vw, 18px);
           border: 2px solid var(--nut-primary-color); /* 邊框顏色 */
           border-radius: 50%; /* 圓形 */
           position: relative;
           background-color: #fff; /* 預設背景色 */
           cursor: pointer;
           transition: all 0.2s ease-in-out;
-          margin-right: 10px; /* 與文字間距 */
+          margin-right: clamp(8px, 2vw, 10px); /* 與文字間距 */
         }
 
         /* 選中時的背景顏色與邊框 */
@@ -428,7 +442,7 @@ const addToOrder = () => {
 
         /* 價格樣式 */
         .addon-option .addon-price {
-          font-size: 16px;
+          font-size: clamp(14px, 3vw, 16px);
           color: #555;
         }
       }
@@ -438,15 +452,14 @@ const addToOrder = () => {
       display: flex;
       position: sticky;
       bottom: 0;
-      width: 100%;
-      padding: 0 20px;
-      box-sizing: border-box;
-      height: 60px;
+      padding: 0 clamp(15px, 4vw, 20px);
+      height: clamp(50px, 12vw, 60px);
+      background-color: white;
       .dialog-num-box {
         display: flex;
         justify-content: center;
-        margin: 30px 0;
-        margin-right: 15px;
+        margin: clamp(20px, 5vw, 30px) 0;
+        margin-right: clamp(10px, 3vw, 15px);
       }
       .dialog-add-order-box {
         margin: auto 0;
@@ -454,11 +467,12 @@ const addToOrder = () => {
         border-color: var(--nut-primary-color);
         display: flex;
         align-items: center;
+        width: 200px;
         .dialog-add-order-btn {
           display: flex;
           justify-content: space-between;
           width: 100%;
-          font-size: 20px;
+          font-size: clamp(16px, 3.5vw, 20px);
           font-weight: 800;
         }
       }
@@ -470,8 +484,8 @@ const addToOrder = () => {
   border: 2px solid var(--nut-primary-color-transparent);
   position: relative;
   width: calc((100% - 20px) / 2);
-  height: clamp(120px, 40vw, 180px);  
-  margin-top: 80px;  
+  height: clamp(120px, 40vw, 180px);
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -479,7 +493,6 @@ const addToOrder = () => {
   padding: 15px;
   border-radius: 15px;
   cursor: pointer;
-
 
   @media screen and (min-width: 768px) {
     width: calc((100% - 60px) / 4);
@@ -508,7 +521,7 @@ const addToOrder = () => {
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      word-break: break-word;  /* 確保長單字會換行 */
+      word-break: break-word; /* 確保長單字會換行 */
 
       @media screen and (min-width: 768px) {
         font-size: clamp(16px, 1.8vw, 18px);
@@ -542,11 +555,11 @@ const addToOrder = () => {
   }
 
   .product-card-badge {
-    width: 26px;  /* 使用固定尺寸 */
+    width: 26px;
     height: 26px;
     position: absolute;
-    top: -70px;
-    right: 10px;
+    top: -60px;
+    right: calc(50% - 60px + 5px);
     background-color: rgb(255, 168, 39);
     color: #fff;
     align-items: center;
@@ -559,16 +572,16 @@ const addToOrder = () => {
     @media screen and (min-width: 768px) {
       width: 30px;
       height: 30px;
-      top: -80px;
-      right: 15px;
+      top: -43%;
+      right: calc(50% - 70px + 5px);
       font-size: 16px;
     }
 
     @media screen and (min-width: 1024px) {
       width: 32px;
       height: 32px;
-      top: -90px;
-      right: 20px;
+      top: -80px;
+      right: calc(50% - 80px + 5px);
     }
   }
 }
@@ -578,5 +591,63 @@ const addToOrder = () => {
 .img-box,
 .product-card-badge {
   transition: all 0.3s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .dialog-box :deep(.nut-popup) {
+    width: 80%;
+    max-width: 600px;
+  }
+
+  .dialog-box :deep(.dialog) {
+    .dialog-content-box {
+      .dialog-scroll-box {
+        .dialog-img-box img {
+          height: clamp(250px, 45vh, 350px);
+        }
+
+        .dialog-info-box {
+          padding: clamp(15px, 2vw, 20px);
+
+          .dialog-title-box div {
+            font-size: clamp(22px, 2.5vw, 26px);
+          }
+
+          .dialog-product-content-box {
+            font-size: clamp(15px, 1.8vw, 16px);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .dialog-box :deep(.nut-popup) {
+    width: 70%;
+    max-width: 800px;
+  }
+
+  .dialog-box :deep(.dialog) {
+    .dialog-content-box {
+      .dialog-scroll-box {
+        .dialog-img-box img {
+          height: clamp(300px, 50vh, 400px);
+        }
+
+        .dialog-info-box {
+          padding: 20px;
+
+          .dialog-title-box div {
+            font-size: 26px;
+          }
+
+          .dialog-product-content-box {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
