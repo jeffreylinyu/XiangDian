@@ -172,6 +172,7 @@ const deleteProduct = async (): Promise<void> => {
       display: -webkit-box;
       -webkit-line-clamp: 2;  /* 限制最多顯示兩行 */
       -webkit-box-orient: vertical;
+      line-clamp: 2;  /* 新增標準屬性 */
       overflow: hidden;
       word-break: break-word;
 
