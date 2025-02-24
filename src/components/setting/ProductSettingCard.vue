@@ -100,73 +100,125 @@ const deleteProduct = async (): Promise<void> => {
 .product-card-box {
   border: 2px solid var(--nut-primary-color-transparent);
   position: relative;
-  width: calc((100% - 20px) / 2);
-  height: 210px;
-  margin-top: 46px;
+  width: calc((100% - 20px) / 2);  /* 手機版兩列佈局 */
+  height: clamp(180px, 40vw, 200px);  /* 使用 clamp 控制高度範圍 */
+  margin-top: 80px;  /* 為圖片預留空間 */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 15px;
   border-radius: 15px;
 
+  @media screen and (min-width: 768px) {
+    width: calc((100% - 60px) / 4);  /* 平板版四列佈局 */
+    height: clamp(200px, 25vw, 220px);
+    margin-top: 90px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: calc((100% - 80px) / 5);  /* 電腦版五列佈局 */
+    height: clamp(220px, 20vw, 240px);
+    margin-top: 100px;
+  }
+
   .img-box {
-    width: 75%;
-    aspect-ratio: 1 / 1;
+    width: clamp(100px, 30vw, 120px);  /* 圖片大小範圍控制 */
+    height: clamp(100px, 30vw, 120px);
     position: absolute;
-    top: -35px;
+    top: -60px;
     left: 50%;
     transform: translate(-50%);
-    background-color: rgba(160, 39, 39, 0);
-  }
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
 
-  .img-box img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
+    @media screen and (min-width: 768px) {
+      width: clamp(120px, 15vw, 140px);
+      height: clamp(120px, 15vw, 140px);
+      top: -70px;
+    }
 
-  .img-box .productImg-skeleton {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: rgb(197, 197, 197);
-    border-radius: 50%;
+    @media screen and (min-width: 1024px) {
+      width: clamp(140px, 12vw, 160px);
+      height: clamp(140px, 12vw, 160px);
+      top: -80px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
   }
 
   .name-box {
+    width: 100%;
     display: flex;
     justify-content: center;
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  .price-box {
-    display: flex;
-    justify-content: center;
-    font-size: 18px;
-    margin-bottom: 8px;
-    align-items: end;
-  }
-  .product-card-badge {
-    width: 26px;
-    height: 26px;
-    position: absolute;
-    top: -40px;
-    right: 26px;
-    background-color: rgb(255, 168, 39);
-    color: #fff;
     align-items: center;
+    min-height: 40px;
+    margin-bottom: 8px;
+
+    span {
+      font-size: clamp(14px, 2.5vw, 16px);
+      text-align: center;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;  /* 限制最多顯示兩行 */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-word;
+
+      @media screen and (min-width: 768px) {
+        font-size: clamp(16px, 1.8vw, 18px);
+      }
+
+      @media screen and (min-width: 1024px) {
+        font-size: clamp(18px, 1.5vw, 20px);
+      }
+    }
+  }
+
+  .price-box {
+    width: 100%;
     display: flex;
-    border-radius: 50%;
     justify-content: center;
+    align-items: flex-end;
+    font-size: clamp(14px, 2.5vw, 16px);
+    margin-bottom: 8px;
+
+    @media screen and (min-width: 768px) {
+      font-size: clamp(16px, 1.8vw, 18px);
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: clamp(18px, 1.5vw, 20px);
+    }
   }
 
   .operate-area {
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    .nut-button {
+      font-size: clamp(12px, 2vw, 14px);
+      padding: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 12px);
+
+      @media screen and (min-width: 768px) {
+        font-size: clamp(14px, 1.5vw, 16px);
+      }
+    }
   }
 }
+
 .skeleton-box {
   display: flex;
   flex-direction: column;
@@ -207,5 +259,12 @@ const deleteProduct = async (): Promise<void> => {
   100% {
     background-position: -200% 0;
   }
+}
+
+/* 添加平滑過渡效果 */
+.product-card-box,
+.img-box,
+img {
+  transition: all 0.3s ease-in-out;
 }
 </style>

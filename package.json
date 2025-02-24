@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "build": "vite build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated\\js\\default-connector",
@@ -30,6 +31,7 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/tsconfig": "^0.5.1",
     "firebase-tools": "^13.29.1",
+    "gh-pages": "^6.3.0",
     "npm-run-all2": "^7.0.1",
     "typescript": "~5.7.3",
     "vite": "^6.0.7",

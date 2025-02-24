@@ -470,40 +470,113 @@ const addToOrder = () => {
   border: 2px solid var(--nut-primary-color-transparent);
   position: relative;
   width: calc((100% - 20px) / 2);
-  height: 170px;
-  margin-top: 46px;
+  height: clamp(120px, 40vw, 180px);  
+  margin-top: 80px;  
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 15px;
   border-radius: 15px;
+  cursor: pointer;
+
+
+  @media screen and (min-width: 768px) {
+    width: calc((100% - 60px) / 4);
+    height: clamp(180px, 25vw, 190px);
+    margin-top: 90px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: calc((100% - 80px) / 5);
+    height: clamp(190px, 20vw, 200px);
+    margin-top: 100px;
+  }
 
   .name-box {
+    width: 100%;
     display: flex;
     justify-content: center;
-    font-size: 18px;
-    margin-bottom: 8px;
+    align-items: center;
+    min-height: 40px;
+
+    span {
+      font-size: clamp(14px, 2.5vw, 16px);
+      text-align: center;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-word;  /* 確保長單字會換行 */
+
+      @media screen and (min-width: 768px) {
+        font-size: clamp(16px, 1.8vw, 18px);
+      }
+
+      @media screen and (min-width: 1024px) {
+        font-size: clamp(18px, 1.5vw, 20px);
+      }
+    }
   }
+
   .price-box {
+    width: 100%;
     display: flex;
     justify-content: center;
-    font-size: 18px;
-    margin-bottom: 8px;
-    align-items: end;
+    align-items: center;
+    font-size: clamp(14px, 2.5vw, 16px);
+    padding: 5px 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: clamp(16px, 1.8vw, 18px);
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: clamp(18px, 1.5vw, 20px);
+    }
+
+    .currency-symbol {
+      margin-right: 2px;
+    }
   }
+
   .product-card-badge {
-    width: 26px;
+    width: 26px;  /* 使用固定尺寸 */
     height: 26px;
     position: absolute;
-    top: -40px;
-    right: 26px;
+    top: -70px;
+    right: 10px;
     background-color: rgb(255, 168, 39);
     color: #fff;
     align-items: center;
     display: flex;
     border-radius: 50%;
     justify-content: center;
+    z-index: 2;
+    font-size: 14px;
+
+    @media screen and (min-width: 768px) {
+      width: 30px;
+      height: 30px;
+      top: -80px;
+      right: 15px;
+      font-size: 16px;
+    }
+
+    @media screen and (min-width: 1024px) {
+      width: 32px;
+      height: 32px;
+      top: -90px;
+      right: 20px;
+    }
   }
+}
+
+/* 添加平滑過渡效果 */
+.product-card-box,
+.img-box,
+.product-card-badge {
+  transition: all 0.3s ease-in-out;
 }
 </style>

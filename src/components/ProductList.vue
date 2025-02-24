@@ -37,7 +37,7 @@ import type { Product, ProductSetting } from "@/interface/product";
 import { collection, addDoc, getDocs, updateDoc } from "firebase/firestore";
 import { storage, db } from "@/firebase";
 
-const productList = ref<ProductSetting[]>([])
+const productList = ref<ProductSetting[]>([]);
 
 // ====== 取得firebase圖片url ======
 const getFireBaseImgUrl = async (name: string): Promise<string> => {
@@ -153,11 +153,11 @@ const basqueTaste: AddonGroup = {
 //                 <div style="margin-top: 22px; text-align: start">
 //                   <p>
 //                     <strong>⏳ 最佳賞味期限：</strong>
-                    
+
 //                   </p>
 //                   <p style="padding-left:25px;">建議於 15 分鐘內食用，感受焦糖的香脆口感！</p>
 //                   <p>
-//                     <strong>📅 有效期限：</strong> 
+//                     <strong>📅 有效期限：</strong>
 //                   </p>
 //                   <p style="padding-left:25px;">冷藏保存 3 天，風味依舊，細細品嚐！</p>
 //                 </div>`,
@@ -185,7 +185,7 @@ const basqueTaste: AddonGroup = {
 
 //                 <div style="margin-top: 22px; text-align: start">
 //                   <p>
-//                     <strong>📅 有效期限：</strong> 
+//                     <strong>📅 有效期限：</strong>
 //                   </p>
 //                   <p style="padding-left:25px;">密封保存於室溫下 <strong>7 天</strong>，風味依舊可口！</p>
 //                 </div>`,
@@ -230,10 +230,9 @@ const basqueTaste: AddonGroup = {
 //                   </ul>
 //                 </div>
 
-
 //                 <div style="margin-top: 22px; text-align: start">
 //                   <p>
-//                     <strong>📅 有效期限：</strong> 
+//                     <strong>📅 有效期限：</strong>
 //                   </p>
 //                   <p style="padding-left:25px;">冷藏保存 5 天</p>
 //                 </div>`,
@@ -261,7 +260,7 @@ const basqueTaste: AddonGroup = {
 
 //                 <div style="margin-top: 22px; text-align: start">
 //                  <p>
-//                     <strong>⏳ 最佳賞味期限：</strong> 
+//                     <strong>⏳ 最佳賞味期限：</strong>
 //                   </p>
 //                   <p style="padding-left:25px;">冷藏保存 4 天</p>
 //                   <p style="padding-left:25px;">冷凍保存 10 天</p>
@@ -291,16 +290,18 @@ div {
 
   .title {
     position: absolute;
-    top: -52px; /* 垂直位置 */
-    left: 50%; /* 定位到水平中央 */
-    transform: translateX(-63%); /* 調整自身寬度居中 */
+    top: 26px;
+    left: -2px;
     background-color: rgba(0, 0, 0, 0);
     width: 100%;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background-image: url("@/assets/logo-removebg.png");
-    background-size: 513px 275px;
-    background-position: 20px 30px; /* 離左側 20px 和頂部 30px */
+    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
   }
 
