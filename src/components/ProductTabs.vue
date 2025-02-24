@@ -25,7 +25,7 @@ import { useProductTabsStore } from "@/stores/productTabs";
 import { useRouter } from "vue-router";
 import { My2 } from "@nutui/icons-vue";
 
-const buttons = ["再點一次", "甜點"];
+const buttons = ["甜點"];
 const productTabsStore = useProductTabsStore();
 
 const selectButton = (index: number, label: string) => {

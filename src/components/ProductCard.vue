@@ -520,6 +520,7 @@ const addToOrder = () => {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      line-clamp: 2;
       overflow: hidden;
       word-break: break-word; /* 確保長單字會換行 */
 

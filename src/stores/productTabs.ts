@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useProductTabsStore = defineStore('productTabs', () => {
-    const selectedButtonIndex = ref<number>(1); 
+    const selectedButtonIndex = ref<number>(0); 
     const selectedButtonText = ref<string>("甜點");
 
     const setSelectedButton = (index: number, text: string) => {
