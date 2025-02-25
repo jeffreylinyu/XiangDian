@@ -22,15 +22,9 @@
 import { useProductTabsStore } from "@/stores/productTabs";
 import { useOrderStore } from "@/stores/orderStore";
 import ProductCard from "@/components/ProductCard.vue";
-import bruleeImg from "@/assets/brulee.jpg";
-import almondcookies from "@/assets/almondcookies.jpg";
-import pannacotta from "@/assets/pannacotta.jpg";
-import mascot from "@/assets/mascot.jpg";
-import basque from "@/assets/basque.jpg";
 import { ref } from "vue";
 import {
   ref as storageRef,
-  uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
 import type { Product, ProductSetting } from "@/interface/product";
@@ -104,29 +98,29 @@ const addMaterials: AddonGroup = {
   ],
 };
 
-const taste: AddonGroup = {
-  title: "口味",
-  multiple: false,
-  options: [
-    { name: "原味", price: 0, default: true },
-    { name: "可可", price: 5, default: false },
-    { name: "伯爵紅茶", price: 5, default: false },
-  ],
-};
+// const taste: AddonGroup = {
+//   title: "口味",
+//   multiple: false,
+//   options: [
+//     { name: "原味", price: 0, default: true },
+//     { name: "可可", price: 5, default: false },
+//     { name: "伯爵紅茶", price: 5, default: false },
+//   ],
+// };
 
-const basqueTaste: AddonGroup = {
-  title: "口味",
-  multiple: false,
-  options: [
-    { name: "楓糖", price: 0, default: true },
-    { name: "抹茶", price: 0, default: false },
-    { name: "檸檬", price: 0, default: false },
-    { name: "巧克力", price: 0, default: false },
-    { name: "香草", price: 0, default: false },
-    { name: "乳酪", price: 0, default: false },
-    { name: "伯爵紅茶", price: 0, default: false },
-  ],
-};
+// const basqueTaste: AddonGroup = {
+//   title: "口味",
+//   multiple: false,
+//   options: [
+//     { name: "楓糖", price: 0, default: true },
+//     { name: "抹茶", price: 0, default: false },
+//     { name: "檸檬", price: 0, default: false },
+//     { name: "巧克力", price: 0, default: false },
+//     { name: "香草", price: 0, default: false },
+//     { name: "乳酪", price: 0, default: false },
+//     { name: "伯爵紅茶", price: 0, default: false },
+//   ],
+// };
 
 // const productList = [
 //   {
