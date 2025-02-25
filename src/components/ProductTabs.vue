@@ -13,17 +13,12 @@
         {{ label }}
       </nut-button>
     </div>
-    <!-- <div class="avatar-box">
-      <nut-avatar> <My2 /> </nut-avatar>
-    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { useProductTabsStore } from "@/stores/productTabs";
 import { useRouter } from "vue-router";
-import { My2 } from "@nutui/icons-vue";
 import { showDialog } from "@nutui/nutui";
 
 const buttons = ["甜點"];
@@ -128,11 +123,6 @@ const showAnnouncement = () => {
       background: var(--nut-primary-color) !important; /* 變色後的顏色 */
       color: white;
     }
-  }
-
-  .avatar-box {
-    display: flex;
-    align-items: center;
   }
 }
 </style>
