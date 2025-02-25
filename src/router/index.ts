@@ -20,7 +20,7 @@ const router = createRouter({
       path: '/settings',
       name: 'Settings',
       component: Settings,
-    },
+    }
   ],
 })
 
